@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Dropwise is a clean workspace for preparing personal downloads." />
+    <title>Dropwise — Downloads, considered</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+    <style>
+      .source-actions { display: flex; align-items: center; gap: 10px; margin-top: 12px; }
+      .file-picker { border: 1px dashed #bdcbbf; background: #fafcf9; color: #496655; border-radius: 5px; padding: 5px 8px; font: 600 10px Manrope; cursor: pointer; }
+      .source-actions span { color: #87928b; font-size: 10px; }
+      .source-actions .is-error { color: #ae564c; }
+      .input-panel.is-dragging { outline: 2px solid #8aa978; outline-offset: 3px; }
+      @media (max-width: 600px) { .source-actions { margin-top: 10px; } }
+    </style>
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar">
+        <a class="brand" href="#top" aria-label="Dropwise home"><span class="brand-mark">↙</span><span>dropwise</span></a>
+        <nav class="primary-nav" aria-label="Main navigation">
+          <a class="active" href="#top"><span>⌄</span> New download</a>
+          <a href="#library"><span>□</span> Library <b id="library-count">03</b></a>
+          <a href="#collections"><span>◇</span> Collections</a>
+        </nav>
+        <div class="sidebar-bottom">
+          <button class="quiet-button" id="theme-toggle" type="button"><span>◐</span> Appearance</button>
+          <a class="quiet-button" href="#help"><span>?</span> Help center</a>
+          <div class="profile"><div class="avatar">MA</div><div><strong>Mohammad Ali</strong><small>Personal workspace</small></div><button type="button" aria-label="Account menu">•••</button></div>
+        </div>
+      </aside>
+
+      <main id="top">
+        <header class="topbar"><button class="mobile-menu" type="button" aria-label="Open navigation">☰</button><p>Saturday, 27 September <span>•</span> Make your downloads count.</p><div class="topbar-actions"><button class="icon-button" type="button" aria-label="Notifications">◌</button><button class="upgrade" type="button">✦ Upgrade</button></div></header>
+        <section class="hero" aria-labelledby="page-title">
+          <div><p class="eyebrow">YOUR DOWNLOAD DESK</p><h1 id="page-title">Anything in.<br><em>Exactly what you need</em> out.</h1><p class="lede">Bring a link or file into one focused workspace. Choose the format, quality, and destination—without the clutter.</p></div>
+          <div class="hero-orbit" aria-hidden="true"><span class="orbit-label label-one">MOV</span><span class="orbit-label label-two">MP3</span><span class="orbit-label label-three">PDF</span><div class="orbit-core">↓</div></div>
+        </section>
+
+        <section class="workbench" aria-label="Create a download">
+          <div class="input-panel" id="drop-zone"><label for="source-url">PASTE A LINK OR ADD A FILE</label><div class="url-row"><span class="link-icon">⌁</span><input id="source-url" type="url" placeholder="https://youtube.com/watch?v=..." autocomplete="url" inputmode="url" /><button id="inspect-button" type="button">Prepare <span>→</span></button></div><div class="source-actions"><button class="file-picker" id="file-picker-button" type="button">↥ Choose a file</button><span id="input-feedback" role="status" aria-live="polite">Files stay in your browser.</span></div><input id="file-input" type="file" hidden /><div class="source-chips"><span>Works with</span><button type="button" data-source="YouTube">YouTube</button><button type="button" data-source="Instagram">Instagram</button><button type="button" data-source="Facebook">Facebook</button><button type="button" data-source="X">X</button><button type="button" data-source="LinkedIn">LinkedIn</button><button type="button" data-source="a direct link">+ more</button></div></div>
+          <div class="workspace-grid">
+            <article class="card source-card" id="source-card"><div class="card-heading"><span class="step">01</span><div><h2>Source</h2><p id="source-summary">Waiting for a link or file</p></div><span class="status-dot"></span></div><div class="source-preview"><div class="play">▶</div><div class="preview-copy"><span id="source-type">PASTE A SOURCE TO START</span><strong id="source-title">Your media preview will live here.</strong><small id="source-meta">No item selected</small></div></div></article>
+            <article class="card format-card"><div class="card-heading"><span class="step">02</span><div><h2>Format & quality</h2><p>Pick an output profile</p></div></div><div class="format-tabs" role="tablist"><button class="format-tab active" type="button" data-kind="video">Video</button><button class="format-tab" type="button" data-kind="audio">Audio</button><button class="format-tab" type="button" data-kind="file">File</button></div><div class="option-list" id="options"></div></article>
+            <article class="card ai-card"><div class="ai-top"><div><span class="ai-badge">✦ AI ASSIST</span><h2>A better default,<br>picked for you.</h2></div><span class="sparkle">✦</span></div><p id="ai-message">Add a source and I’ll suggest the best balance of quality and file size.</p><button id="ai-button" type="button">Get smart recommendation <span>→</span></button></article>
+          </div>
+          <div class="ready-bar"><div><span class="ready-check">✓</span><span id="selection-copy">Select a source to prepare your download.</span></div><button id="download-button" type="button" disabled>Download <span>↓</span></button></div>
+        </section>
+
+        <section class="library-section" id="library"><div class="section-title"><div><p class="eyebrow">RECENTLY PREPARED</p><h2>Your library</h2></div><button type="button" class="text-button">View all <span>→</span></button></div><div class="library-list" id="library-list"></div></section>
+        <footer id="help"><span>© 2026 Dropwise</span><span>Download only content you own or are authorized to save.</span><a href="README.md">Usage guide</a></footer>
+      </main>
+    </div>
+    <template id="option-template"><button class="quality-option" type="button"><span class="radio"></span><span class="option-main"><strong></strong><small></small></span><span class="option-size"></span></button></template>
+    <script src="app.js"></script>
+  </body>
+</html>
