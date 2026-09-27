@@ -1,0 +1,10 @@
+{
+  "name": "dropwise",
+  "version": "1.0.0",
+  "private": true,
+  "description": "A polished, local-first download workspace prototype.",
+  "scripts": {
+    "start": "python3 -m http.server 4173",
+    "test": "node --check app.js"
+  }
+}
